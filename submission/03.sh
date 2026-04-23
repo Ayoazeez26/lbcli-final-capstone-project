@@ -4,4 +4,4 @@ COINBASE_TXID=$(bitcoin-cli -signet getblock $(bitcoin-cli -signet getblockhash 
 
 # Get all txs in block 216,351 and find which one spends it
 bitcoin-cli -signet getblock $(bitcoin-cli -signet getblockhash 216351) 2 | \
-  jq --arg txid "$COINBASE_TXID" '.tx[] | select(.vin[].txid == $txid) | .txid'
+  jq -r --arg txid "$COINBASE_TXID" '.tx[] | select(.vin[].txid == $txid) | .txid'
